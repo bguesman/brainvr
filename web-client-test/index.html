@@ -10,9 +10,10 @@
   </head>
   <body>
     <a-scene>
-      <a-sphere id="ball" position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+      <a-sphere id="ball" position="0 1.25 -5" radius="1.25" material="shader:flat;color:#0000D0;" light="color: #0000FF; distance:120; intensity:4; type:point"></a-sphere>
+      <a-sphere position="4 1.25 -5" radius="1.25" material="shader:flat;color:#0000D0;" light="color: #0000FF; distance:120; intensity:4; type:point"></a-sphere>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#333333"></a-plane>
+      <a-sky color="#000011"></a-sky>
     </a-scene>
   </body>
 </html>

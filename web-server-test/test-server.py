@@ -3,6 +3,7 @@
 
 from flask import Flask
 from flask_cors import CORS, cross_origin
+from flask import jsonify
 from random import uniform
 
 app = Flask(__name__)
@@ -18,7 +19,8 @@ def index():
 @app.route('/datarequest')
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def datarequest():
-    return str(uniform(0, 1))
+    intensities = [str(uniform(0, 1)) for x in range(0, 6)]
+    return jsonify(intensities)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
