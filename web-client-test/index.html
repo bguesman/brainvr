@@ -1,6 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
     <script
       src="https://code.jquery.com/jquery-3.3.1.js"
       integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -10,10 +11,17 @@
   </head>
   <body>
     <a-scene>
-      <a-sphere id="ball" position="0 1.25 -5" radius="1.25" material="shader:flat;color:#0000D0;" light="color: #0000FF; distance:120; intensity:4; type:point"></a-sphere>
-      <a-sphere position="4 1.25 -5" radius="1.25" material="shader:flat;color:#0000D0;" light="color: #0000FF; distance:120; intensity:4; type:point"></a-sphere>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#333333"></a-plane>
-      <a-sky color="#000011"></a-sky>
+      <a-sphere class="ball" id="ball0" position="-7 1.25 -8" initradius="2.25" radius="2.25" material="color:#86B1F9;"></a-sphere>
+      <a-sphere class="ball" id="ball1" position="7 1.25 -8" initradius="1.25" radius="1.25" material="color:#871F1C;"></a-sphere>
+      <a-sky color="#FCFBED"></a-sky>
+      <a-entity id="instructions-container">
+        <!-- <a-animation attribute="position"
+               dur="20000"
+               fill="forwards"
+               to="0 20 -5"
+               repeat="none"></a-animation>
+        <a-text position="0 -10 -5" color="#222222" value="Breathe steadily"></a-text> -->
+      <a-entity>
     </a-scene>
   </body>
 </html>
