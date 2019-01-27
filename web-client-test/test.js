@@ -96,7 +96,7 @@ function start_request_loop() {
       for (i = 0; i < 4; i++) {
         sum += data[i];
       }
-      alpha_proportion = data[1] / sum;
+      alpha_proportion = data[alpha] / sum;
       upsetness = 1.0 - alpha_proportion + 0.03;
 
       console.log(upsetness);
