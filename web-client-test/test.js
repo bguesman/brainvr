@@ -51,7 +51,7 @@ async function main() {
   /* Now, show the intro. */
   var i;
   for (i = 0; i < intro_phrases.length; i++) {
-    intro_phrase = "<a-text id=\"introphrase\" align=\"center\" position=\"0 -8.5 -3\" color=\"#222222\" value=\"" + intro_phrases[i].phrase + "\"></a-text>";
+    intro_phrase = "<a-text id=\"introphrase\" align=\"center\" position=\"0 -8.5 -3\" color=\"#cccccc\" value=\"" + intro_phrases[i].phrase + "\"></a-text>";
     animation_one = "<a-animation id=\"anim1\" attribute=\"position\" dur=\"2000\" fill=\"forwards\" from=\"0 -8.5 -3\" to=\"0 10 0\" repeat=\"0\"></a-animation>";
     animation_two = "<a-animation id=\"anim2\" attribute=\"position\" dur=\"2000\" fill=\"forwards\" to=\"0 20 0\" repeat=\"0\"></a-animation>";
 

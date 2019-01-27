@@ -17,9 +17,10 @@ def index():
     return 'Hello world'
 
 @app.route('/datarequest')
-@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@cross_origin(origin='*', headers=['Content-Type','Authorization'])
 def datarequest():
     intensities = [str(uniform(0, 1)) for x in range(0, 6)]
+    # intensities = getIntensities()
     return jsonify(intensities)
 
 if __name__ == '__main__':
