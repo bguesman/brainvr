@@ -1,24 +1,66 @@
 import pandas
+import numpy as np
+import scipy 
+from scipy import signal
+from matplotlib import pyplot as plt
 
-def main():
+def bandpower(x, fs, fmin, fmax):
+	f, Pxx = scipy.signal.periodogram(x, fs=fs)
+	ind_min = scipy.argmax(f > fmin) - 1
+	ind_max = scipy.argmax(f > fmax) - 1
+	return scipy.trapz(Pxx[ind_min: ind_max], f[ind_min: ind_max])
+	
+def band():
+	r = np.empty([1, 4])
 	#f = open("data_try.txt","r") 
 	#print(f.read())
-	data = pandas.read_csv('EEG_test.txt', header = 6)
-	d = data.values;
-	ch1 = d[-100:,1]
-	ch2 = d[-100:,2]
-	ch3 = d[-100:,3]
-	ch4 = d[-100:,4]
-	ch5 = d[-100:,5]
-	ch6 = d[-100:,6]
-	ch7 = d[-100:,7]
-	ch8 = d[-100:,8]
-	print(ch1)
+	while True:
+		data = pandas.read_csv('data_try.txt', header = 6)
+		d = data.values;
+		ch = np.array(d[-100:,1:9], dtype=np.float32)
+		
+		it = 0
+		Ca = 0
+		Ct = 0
+		Cd = 0
+		Cb = 0
+		
+		for i in range(8):
+			if (np.std(ch[:,i])) > 0:
+				it = it + 1
+				Cd = Cd + bandpower(ch[:,i], 250, 0.1, 4)
+				Ct = Ct + bandpower(ch[:,i], 250, 4, 8)
+				Ca = Ca + bandpower(ch[:,i], 250, 8, 15)
+				Cb = Cb + bandpower(ch[:,i], 250, 15, 30)
+				
+		if it > 0:
+			Ca = Ca/it
+			Ct = Ct/it
+			Cd = Ca/it
+			Cb = Cb/it
+		else:
+			Ca = 0
+			Ct = 0
+			Cd = 0
+			Cb = 0
+			
+		#r = np.array([Ca, Ct, Cd, Cb])
+		r = np.append(r, [Ca, Ct, Cd, Cb])
 
 	
+	
+
+			
+			
+			
+
+		#cp1 = bandpower(np.abs(ch1), 250, 8, 13)
+		
+	
+	
 if __name__ == '__main__':
-	while True:
-		main()
+	#while True:
+	band()
 		#f = open("data_try.txt","r") 
 		#f= open("ugh.txt","w+")
 		#print(f.read())#('fldsd')
