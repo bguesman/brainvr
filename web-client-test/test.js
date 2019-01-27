@@ -1,6 +1,10 @@
 /* Constants. */
 /* Number of EEG channels. */
 const num_channels = 8;
+const alpha = 0;
+const theta = 1;
+const delta = 2;
+const beta = 3;
 
 /* Instructions to float past. */
 const high_activity_instructions = ["Your brain is very busy right now.",
@@ -51,7 +55,7 @@ async function main() {
   /* Now, show the intro. */
   var i;
   for (i = 0; i < intro_phrases.length; i++) {
-    intro_phrase = "<a-text id=\"introphrase\" align=\"center\" position=\"0 -8.5 -3\" color=\"#cccccc\" value=\"" + intro_phrases[i].phrase + "\"></a-text>";
+    intro_phrase = "<a-text id=\"introphrase\" align=\"center\" position=\"0 -8.5 -3\" color=\"#dddddd\" value=\"" + intro_phrases[i].phrase + "\"></a-text>";
     animation_one = "<a-animation id=\"anim1\" attribute=\"position\" dur=\"2000\" fill=\"forwards\" from=\"0 -8.5 -3\" to=\"0 10 0\" repeat=\"0\"></a-animation>";
     animation_two = "<a-animation id=\"anim2\" attribute=\"position\" dur=\"2000\" fill=\"forwards\" to=\"0 20 0\" repeat=\"0\"></a-animation>";
 
@@ -87,7 +91,21 @@ function start_request_loop() {
         }
       }
 
+      /* Calculate percentage in alpha band. */
+      sum = 0;
+      for (i = 0; i < 4; i++) {
+        sum += data[i];
+      }
+      alpha_proportion = data[1] / sum;
+      upsetness = 1.0 - alpha_proportion + 0.03;
+
+      console.log(upsetness);
+
       /* Apply modulations to shapes in the scene. */
+      for (shape = 0; shape < 32; shape++) {
+        fixed_radius = document.getElementById(shape + 1).getAttribute("fixedradius");
+        document.getElementById(shape + 1).setAttribute("radius", upsetness * fixed_radius);
+      }
 
       /* Size modulation. */
       for (i = 0; i < 2; i ++) {
